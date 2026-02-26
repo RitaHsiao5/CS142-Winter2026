@@ -1,4 +1,4 @@
-kyle// AntSimGUI.java
+// AntSimGUI.java - kyle
 
 // Creates an interactive GUI and displays an animation of a world of ants.
 // I don't really know much about JFrame, so feel free to change anything. - Kyle Hamasaki
