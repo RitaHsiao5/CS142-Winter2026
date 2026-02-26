@@ -6,6 +6,7 @@ public class xLifeModel extends JPanel {
     private int rows;
     private int cols;
     private int cellSize = 20;
+    xZombie zombie = new xZombie(rows,cols,grid);
 
     public xLifeModel(int r, int c) {
         this.rows = r;
@@ -25,6 +26,11 @@ public class xLifeModel extends JPanel {
             for (int j = 0; j < cols; j++) {
                 // Need to check move all object
                 // Then update nextGen
+
+                // Zombies
+                if (grid[i][j] == 'Z') {
+                    zombie.search(i,j);
+                }
             }
         }
         grid = nextGen;
