@@ -3,7 +3,7 @@
 public class WorldGrid {
     private final WorldObject[][] objects;
     private final Terrain[][] terrain;
-    private final Pheromones[][][] pheromones;
+    private final Pheromones pheromones;
 
     private final int width;
     private final int height;
@@ -17,7 +17,7 @@ public class WorldGrid {
         this.height = height;
         terrain = new Terrain[height][width];
         objects = new WorldObject[height][width];
-        pheromones = new Pheromones[PheromoneType.values().length][width][height];
+        pheromones = new Pheromones(width, height);
 
         // Default: fill with Dirt
         for (int y=0; y<height; ++y) {
@@ -27,6 +27,34 @@ public class WorldGrid {
         }
         // objects is already null filled
         // pheromones is already null filled
+    }
+
+    public int getWidth(){ return width; }
+    public int getHeight(){ return height; }
+
+    //TODO: set terrain at Point to Terrain
+    public void setTerrain(Point pos, Terrain type){
+
+    }
+
+    //TODO: return the kind of Terrain at pos
+    public Terrain getTerrainAt(Point pos){
+        return null;
+    }
+
+    // returns true if dirt was dug
+    public boolean dig(Point p){
+        //TODO: check if Terrain at p is dirt, remove the dirt, then add dirt
+        // into ant inventory. Need to make sure ant has room for dirt
+        return false;
+    }
+
+    public void decayPheromones(double amount) {
+        pheromones.decay(amount); // 1% loss each tick
+    }
+
+    public void spreadPheromones(double amount) {
+        pheromones.decay(amount); // 1% loss each tick
     }
 
     public WorldObject getObjectAt(Point pos){
