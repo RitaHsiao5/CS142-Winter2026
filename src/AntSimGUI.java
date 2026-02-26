@@ -1,13 +1,14 @@
-// AntSimGUI.java - kyle
-
 // Creates an interactive GUI and displays an animation of a world of ants.
-// I don't really know much about JFrame, so feel free to change anything. - Kyle Hamasaki
+// I don't really know much about JFrame, so feel free to change anything.
+// By Kyle Hamasaki
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 
 public class AntSimGUI extends JFrame {
+    // The size of the square cells containing the Terrain, Ant, and WorldObject
+    private final int cellSize = 10;
     // The WorldGrid
     private WorldGrid grid;
     // The entire interface of the program
@@ -17,18 +18,15 @@ public class AntSimGUI extends JFrame {
     // Used to draw in imageContainer
     private Graphics g;
 
-    private AntSim sim;
-
-    public AntSimGUI(AntSim sim) {
+    public AntSimGUI() {
         this.grid = grid;
-        this.sim = sim;
         frame = new JFrame();
         frame.setLayout(new BorderLayout());
         frame.setTitle("Ant Simulator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Creates an area on the frame for the animation.
-        BufferedImage worldImage = new BufferedImage(grid.getWidth() * 10, grid.getHeight() * 10,
+        BufferedImage worldImage = new BufferedImage(grid.getWidth() * cellSize, grid.getHeight() * cellSize,
                 BufferedImage.TYPE_INT_RGB);
 
         imageContainer = new JLabel(new ImageIcon(worldImage));
@@ -56,8 +54,39 @@ public class AntSimGUI extends JFrame {
     }
 
     // Draws the WorldGrid as a picture.
+    // By Kyle Hamasaki
     public void drawWorld() {
-        // I have no idea how to draw the world, so feel free to write any code.
+        for (int i = 0; i < grid.getWidth(); i++) {
+            for (int j = 0; j < grid.getHeight(); j++) {
+                Point currentLocation = new Point(i, j);
+
+                // Draws the Terrain
+                Terrain terrain = grid.getTerrainAt(currentLocation);
+                String terrainName = terrain.getSymbol();
+                if (terrainName.equals("#")) {
+                    // The color if the Terrain is Dirt
+                    g.setColor(new Color(0x785B4C));
+                    // The color if the Terrain is Rock
+                } else if (terrainName.equals("R")) {
+                    g.setColor(new Color(0xEA6C6E6E, true));
+                } else if (terrainName.equals(".")) {
+                    // The color if the Terrain is Tunnel
+                    g.setColor(new Color(0x514031));
+                } else {
+                    // The color if the Terrain is Air/Terrain
+                    g.setColor(new Color(0xFFFFFF));
+                }
+                g.fillRect(i, j, cellSize, cellSize);
+
+                // Draws the WorldObject
+                WorldObject worldObject = grid.getObjectAt(currentLocation);
+                String worldObjectName = worldObject.getSymbol();
+                // Draws the character of the WorldObject in the middle of the cell.
+                g.drawString(worldObjectName, 5 + (i * cellSize), 5 + (j * cellSize));
+
+                // I am unsure how to draw the Ants.
+            }
+        }
     }
 
     // Updates the WorldGrid and draws a new picture of the WorldGrid.
