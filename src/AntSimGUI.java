@@ -17,8 +17,11 @@ public class AntSimGUI extends JFrame {
     // Used to draw in imageContainer
     private Graphics g;
 
-    public AntSimGUI() {
+    private AntSim sim;
+
+    public AntSimGUI(AntSim sim) {
         this.grid = grid;
+        this.sim = sim;
         frame = new JFrame();
         frame.setLayout(new BorderLayout());
         frame.setTitle("Ant Simulator");
