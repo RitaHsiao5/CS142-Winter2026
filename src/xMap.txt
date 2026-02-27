@@ -1,5 +1,6 @@
 11
 13
+<<<<<<< HEAD
 ---W----S-Z--
 XXX---X------
 X---Z-X--ZH--
@@ -9,6 +10,17 @@ X---S-X-----X
 -S---XX-OOOOX
 --Z-----OOOOX
 XW-----WOOOOX
+=======
+---W------Z--
+XXX----------
+X-----X---XXX
+X---Z-X--Z-WX
+X-----X-----X
+X--Z--X-----X
+---Z-XX-----X
+Z-------OOOOX
+XW-Z---WOOOOX
+>>>>>>> cd8d2d35011e55cf6b943725c44063d88d8fc81c
 XXXXXX-XOOOOX
--------XXXXXX
+-Z-----XXXXXX
 
