@@ -1,16 +1,17 @@
 // Zombie Method by Leehuot Lay
 
 
-public class xZombie{
+public class xZombie extends xHuman {
     char[][] grid;
     private int rows, cols, humanX, humanY;
 
     // Zombie move first, check if have human. yes, go hunt and change human else end turns
-    public xZombie(int r, int c, char[][] grid) {
+    public xZombie(int r, int c) {
+        super(r,c);
         this.rows = r;
         this.cols = c;
-        this.grid = grid;
-        boolean humanFound = search(r, c);
+        //this.grid = grid;
+        //boolean humanFound = search(r, c);
     }
         // searching for human
         public boolean search ( int r, int c){

@@ -1,7 +1,7 @@
-// CS 142 xSoldier
+// CS 142 xHuman
 // ----------------------------------------------------------------------------
-// xSoldier objects
-// Color  : BLUE
+// xHuman objects
+// Color  : GREEN
 // Move   : random direction(N,E,S,W)
 // ----------------------------------------------------------------------------
 
@@ -9,7 +9,7 @@ import java.awt.*;
 import java.util.Random;
 
 // For reusing all methods, states of xEntity, need to be extends xEntity
-public class xSoldier extends xHuman {
+public class xHuman extends xEntity {
 	// State / Field of xSoldier
     private Direction currDir;
     //private int hunger; // the maximum number of food
@@ -17,15 +17,18 @@ public class xSoldier extends xHuman {
 
     // -----------------------OVERRIDE METHODS---------------------------------
     // 0. Constructor not inheritance from xEntity
-    public xSoldier(int x, int y){
-       super(x,y);
+    public xHuman(int x, int y){
+        super();
+        isprotect = false;
+        setX(x);
+        setY(y);
     }
 
     // 1. Color: BLUE
     public Color getColor() {
-        return Color.BLUE;
+        return Color.GREEN;
     }
-    /*
+
     // 2. Move random direction(N,E,S,W),
     public Direction move() {
         // Update currDir for 6 steps
@@ -41,6 +44,6 @@ public class xSoldier extends xHuman {
             currDir = Direction.WEST;
         }
         return currDir;
-    }*/
+    }
     // ----------------------- END OVERRIDE METHODS ---------------------------
 }
