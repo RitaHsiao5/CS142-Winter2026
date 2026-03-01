@@ -1,38 +1,48 @@
-public class Citizen extends Human {
+import java.util.Random;
 
-    public Citizen(int x, int y, int health) {
+public abstract class Human extends LivingEntity {
+    protected boolean infected = false;
+    protected static Random rand = new Random();
+
+    public Human(int x, int y, int health) {
         super(x, y, health);
     }
 
-    @Override
-    public void step(Entity[][] grid) {
-        // 1. Move randomly
-        moveRandom(grid);
-
-        // 2. Check nearby humans to spread infection
+    // Move randomly to a neighboring cell within grid bounds
+    public void moveRandom(Entity[][] grid) {
         int rows = grid.length;
         int cols = grid[0].length;
+        int newX = getX();
+        int newY = getY();
 
-        for (int dx = -1; dx <= 1; dx++) {
-            for (int dy = -1; dy <= 1; dy++) {
-                int nx = getX() + dx;
-                int ny = getY() + dy;
-
-                if (nx >= 0 && nx < rows && ny >= 0 && ny < cols) {
-                    Entity e = grid[nx][ny];
-                    if (e instanceof Human) {
-                        Human h = (Human) e;
-
-                        // If this citizen is infected, chance to infect neighbor
-                        if (this.isInfected() && !h.isInfected()) {
-                            double chance = 0.25; // 25% infection chance
-                            if (Math.random() < chance) {
-                                h.infect();
-                            }
-                        }
-                    }
-                }
-            }
+        // Try to move one step in random direction
+        int dir = rand.nextInt(4); // 0: up, 1: down, 2: left, 3: right
+        switch (dir) {
+            case 0: if(newY > 0) newY--; break;
+            case 1: if(newY < cols - 1) newY++; break;
+            case 2: if(newX > 0) newX--; break;
+            case 3: if(newX < rows - 1) newX++; break;
         }
+
+        // Check if the new cell is empty
+        if(grid[newX][newY] == null) {
+            setX(newX);
+            setY(newY);
+        }
+        // else: stay in place (collision)
     }
+
+    // Check infection status
+    public boolean isInfected() {
+        return infected;
+    }
+
+    // Infect this human
+    public void infect() {
+        infected = true;
+    }
+
+    // Step method: will be implemented in subclasses
+    @Override
+    public abstract void step(Entity[][] grid);
 }
