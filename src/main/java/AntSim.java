@@ -3,7 +3,6 @@
 public class AntSim {
     public static void main(String[] args) {
         printIntro();
-
     }
     // Prints the introduction
     // Feel free to change the introduction
