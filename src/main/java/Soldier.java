@@ -31,11 +31,9 @@ public class Soldier extends Human{
         if(closestZombie==null){
             moveRandom(grid);
         }
-
         else if(minDistance<=1){
             attack(closestZombie);
         }
-
         //move to closest zombie
         else{
             moveToward(closestZombie, grid);
