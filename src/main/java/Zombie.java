@@ -3,6 +3,10 @@ package src.main.java;
 
 public class Zombie extends LivingEntity{
     
+    public Zombie(int x, int y, int health) {
+        super(x, y, health);
+    }
+
     protected int damage;
 
     //senior zombie is faster

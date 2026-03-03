@@ -3,6 +3,11 @@
 package src.main.java;
 
 public class Soldier extends Human{
+    
+    public Soldier(int x, int y, int health) {
+        super(x, y, health);
+    }
+
     public void step(Entity[][] grid){
         
         Zombie closestZombie=null;

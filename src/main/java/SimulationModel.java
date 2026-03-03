@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import src.main.java.Soldier;
+
 public class SimulationModel {
     
     private Entity[][] grid;
@@ -20,12 +22,15 @@ public class SimulationModel {
                 int z=(int)(Math.random()*100);
                 
                 if(z<10){
-                    grid[x][y]=new Human();
+                    grid[x][y]=new Citizen(x, y, 100);
                 }
-                
-                //1/6 persen of living is zombie at the beganing
+
                 else if(z<12){
-                    grid[x][y]=new Zombie();
+                    grid[x][y]=new Soldier(x, y, 150);
+                }
+
+                else if(z<15){
+                    grid[x][y]=new Zombie(x, y, 150);
                 }
 
                 else{
