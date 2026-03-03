@@ -1,5 +1,4 @@
 //zombie.java
-package src.main.java;
 
 public class Zombie extends LivingEntity{
 
