@@ -1,5 +1,7 @@
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.swing.JFrame;
 import javax.swing.Timer;
 
 public class Main {
@@ -8,19 +10,16 @@ public class Main {
         //test line to show commit
 
         SimulationModel model = new SimulationModel();
+        model.initializeGrid(20, 20);
 
-        model.initialize(15, 15, 10, 2, 2);
+        SimulationGUI gui = new SimulationGUI(model);
 
-        int totalSteps = 20;
-        for (int step = 1; step <= totalSteps; step++) {
-            
-            System.out.println("-Start New Turn-");
-            
-            model.update(); 
-            model.spreadInfection(); 
-            
-            // 呼叫你在 SimulationModel 寫好的印出地圖 
-            model.printGrid();
-        }
-        
+        JFrame frame = new JFrame("Zombie Simulation");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(gui);
+        frame.pack();
+        frame.setVisible(true);
+
+        gui.startSimulation();
+    }    
 }
