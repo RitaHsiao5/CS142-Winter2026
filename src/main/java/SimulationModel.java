@@ -70,22 +70,6 @@ public class SimulationModel {
         grid=newGrid;
     }
 
-    // Maybe will delite because it will add on other class
-    public void spreadInfection(Entity[][] newGrid){
-
-        for(int x=0;x<rows;x++){
-            for(int y=0;y<cols;y++){
-
-                if(newGrid[x][y] instanceof Human){
-
-                    if(hasZombieAround(newGrid, x, y)){
-                        newGrid[x][y]=new Zombie();
-                    }
-                }
-            }
-        }
-    }   
-
     public Entity[][] getGrid(){
         return grid;
     }
