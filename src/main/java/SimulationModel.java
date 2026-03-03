@@ -23,17 +23,24 @@ public class SimulationModel {
                 int z=(int)(Math.random()*100);
                 
                 if(z<10){
+                    if(z<1){
+                        grid[x][y]=new Doctor(x, y);
+                        int z1=(int)(Math.random()*100);
+                        if(z1<1){
+                            grid[x][y]=new MiracleDoctor(x, y, 150);
+                        }
+                    }
                     grid[x][y]=new Citizen(x, y, 100);
                 }
                 else if(z<12){
                     grid[x][y]=new Soldier(x, y, 150);
                 }
                 else if(z<15){
-                    int z1=(int)(Math.random()*100);
-                    if(z1<10){
+                    int z2=(int)(Math.random()*100);
+                    if(z2<10){
                         grid[x][y]=new LordOfZombie(x, y, 150);
                     }
-                    else if(z1<11){
+                    else if(z2<11){
                         grid[x][y]=new SeniorZombie(x, y, 200);
                     }
                     grid[x][y]=new NormalZombie(x, y, 120);
