@@ -1,6 +1,6 @@
 //SeniorZombie.java
 
-package src.main.java;
+
 
 public class SeniorZombie extends Zombie{
     
