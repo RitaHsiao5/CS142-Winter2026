@@ -51,7 +51,7 @@ public class SimulationModel {
             }
         }
     }
-    
+
     public void update(){
 
         // clear grid
