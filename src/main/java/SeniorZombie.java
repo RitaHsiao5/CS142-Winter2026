@@ -1,7 +1,5 @@
 //SeniorZombie.java
 
-
-
 public class SeniorZombie extends Zombie{
     
     public SeniorZombie(int x, int y, int health){

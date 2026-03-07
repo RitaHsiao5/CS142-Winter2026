@@ -24,13 +24,17 @@ public class SimulationModel {
                 
                 if(z<10){
                     if(z<1){
-                        grid[x][y]=new Doctor(x, y);
                         int z1=(int)(Math.random()*100);
                         if(z1<1){
                             grid[x][y]=new MiracleDoctor(x, y, 150);
                         }
+                        else{
+                            grid[x][y]=new Doctor(x, y);
+                        }
                     }
-                    grid[x][y]=new Citizen(x, y, 100);
+                    else{
+                        grid[x][y]=new Citizen(x, y, 100);
+                    }
                 }
                 else if(z<12){
                     grid[x][y]=new Soldier(x, y, 150);
@@ -63,27 +67,33 @@ public class SimulationModel {
                 Entity e=grid[x][y];
 
                 if(e!=null){
+                    if (e instanceof Human){
+                        Human h=(Human)e;
+                        // if this human be infect for too long.
+                        // this value can be change(10)
+                        if(h.isInfected() && h.getInfectionSteps()>=10){
+                            e=new NormalZombie(x, y, 100);
+                        }
+                    }
                     e.step(grid); 
+
+                    // put into grid
+                    int nx=e.getX();
+                    int ny=e.getY();
+
+                    //check is this block nothing?
+                    if (newGrid[nx][ny]==null){
+                        newGrid[nx][ny]=e;
+                    }
+                    // if there are any entity in this block
+                    else{
+                        newGrid[x][y]=e;
+                        e.setX(x); 
+                        e.setY(y);
+                    }
                 }
             }
         }
-
-        // put into grid
-        for(int x=0;x<rows;x++){
-            for(int y=0;y<cols;y++){
-
-                Entity e=grid[x][y];
-
-                if(e!=null){
-
-                    int newX = e.getX();
-                    int newY = e.getY();
-
-                    newGrid[newX][newY] = e;
-                }
-            }
-        }
-
         grid=newGrid;
     }
 

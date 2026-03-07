@@ -10,7 +10,7 @@ public class Main {
         //test line to show commit
 
         SimulationModel model = new SimulationModel();
-        model.initializeGrid(20, 20);
+        model.initializeGrid(40, 60);
         
         SimulationGUI gui = new SimulationGUI(model);
         gui.display(); 

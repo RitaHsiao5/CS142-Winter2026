@@ -72,15 +72,25 @@ public class SimulationGUI extends JPanel{
         for(int x=0;x<grid.length;x++){
             for(int y=0;y<grid[0].length;y++){
                 
-                //human is a blue on gui
+                //Soldier is a blue on gui
                 //This color can be change
-                if(grid[x][y] instanceof Human){
+                if(grid[x][y] instanceof Soldier){
                     g.setColor(Color.BLUE);
                 }
-
+                //citizen is green
+                else if(grid[x][y] instanceof Citizen){
+                    g.setColor(Color.GREEN);
+                }
+                else if(grid[x][y] instanceof Doctor){
+                    g.setColor(Color.CYAN);
+                }
+                //Lord of zombie is orange
+                else if(grid[x][y] instanceof LordOfZombie){
+                    g.setColor(Color.RED);
+                }
                 //all zombie is red
                 else if(grid[x][y] instanceof Zombie){
-                    g.setColor(Color.RED);
+                    g.setColor(Color.ORANGE);
                 }
 
                 //not thing this block show white
@@ -94,11 +104,11 @@ public class SimulationGUI extends JPanel{
                 if(grid[x][y] instanceof LivingEntity){
                     LivingEntity le=(LivingEntity)grid[x][y];
                     g.setColor(Color.BLACK);
-                    g.drawString(""+le.getHealth(), y*cellSize+5, x*cellSize+10);
+                    g.drawString(""+le.getHealth(), y*cellSize+1, x*cellSize+10);
                 }
 
                 //draw edge
-                g.setColor(Color.GRAY);
+                g.setColor(Color.LIGHT_GRAY);
                 g.drawRect(y*cellSize, x*cellSize, cellSize, cellSize);
             }
         }
