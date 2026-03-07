@@ -95,11 +95,11 @@ public class SimulationGUI extends JPanel{
                         g.setColor(new Color(50, 255, 255)); 
                     }
                     else if (h instanceof Soldier){
-                        g.setColor(new Color(210, 210, 255));
+                        g.setColor(new Color(120, 150, 255));
                     } 
                     //citizen
                     else {
-                        g.setColor(new Color(170, 150, 255));
+                        g.setColor(new Color(260, 220, 255));
                     }
                 }
                 //Lord of zombie is orange
@@ -108,7 +108,7 @@ public class SimulationGUI extends JPanel{
                 }
                 //all zombie is red
                 else if(grid[x][y] instanceof Zombie){
-                    g.setColor(Color.ORANGE);
+                    g.setColor(new Color(255, 170, 0));
                 }
 
                 //not thing this block show white
