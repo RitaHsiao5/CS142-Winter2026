@@ -84,23 +84,22 @@ public class SimulationGUI extends JPanel{
                 if (e instanceof Human) {
                     Human h = (Human) e;
                 
-                    // 1. 優先判斷是否被感染（視覺化進度）
                     if (h.isInfected()){
-                        g.setColor(Color.MAGENTA); // 紫色：代表感染中
+                        g.setColor(Color.MAGENTA); 
                     }
                     // color it depends on it career
                     else if (h instanceof MiracleDoctor){
-                        g.setColor(new Color(0, 255, 0)); 
+                        g.setColor(new Color(150, 255, 150)); 
                     }
                     else if (h instanceof Doctor){
-                        g.setColor(new Color(0, 150, 150)); 
+                        g.setColor(new Color(50, 255, 255)); 
                     }
                     else if (h instanceof Soldier){
-                        g.setColor(new Color(0, 0, 255));
+                        g.setColor(new Color(210, 210, 255));
                     } 
                     //citizen
                     else {
-                        g.setColor(new Color(0, 0, 150));
+                        g.setColor(new Color(170, 150, 255));
                     }
                 }
                 //Lord of zombie is orange
