@@ -62,6 +62,7 @@ public class SimulationGUI extends JPanel{
         timer.stop();
         model.reset();
         repaint();
+        refreshStats();
     }
 
     public void setParameters(int rows, int cols, int time){
@@ -70,7 +71,7 @@ public class SimulationGUI extends JPanel{
         this.turn=time;
         timer.setDelay(time);
 
-        model.initialize(rows, cols);
+        model.initializeGrid(rows, cols);
         repaint();
     }
 
