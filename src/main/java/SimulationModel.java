@@ -111,37 +111,6 @@ public class SimulationModel {
         return grid;
     }
 
-    // citizen: C / Soldier: S / Doctor and MiracleDoctor: D / norman and senior zombie: Z / LordofZombie: L
-    public void printGrid(){
-
-        for(int x=0;x<rows;x++){
-            for(int y=0;y<cols;y++){
-
-                Entity e=grid[x][y];
-                
-                if(e instanceof Citizen){
-                    System.out.print(" C ");
-                }
-                else if(e instanceof Soldier){
-                    System.out.print(" S ");
-                }
-                else if(e instanceof Doctor){
-                    System.out.print(" D ");
-                }
-                else if(e instanceof LordOfZombie){
-                    System.out.print(" L ");
-                }
-                else if(e instanceof Zombie){
-                    System.out.print(" Z ");
-                }
-                else {
-                    System.out.print("   ");
-                }
-            }
-            System.out.println();
-        }
-    }
-
     //End if there is no human or no zombie
     public String checkGameOver(){
         int numH=0;
