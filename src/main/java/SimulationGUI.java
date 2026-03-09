@@ -15,7 +15,6 @@ public class SimulationGUI extends JPanel{
     private int turn=500; 
 
     // label to control
-    private JLabel statsLabel;
 
     private JLabel humanLabel;
     private JLabel zombieLabel;

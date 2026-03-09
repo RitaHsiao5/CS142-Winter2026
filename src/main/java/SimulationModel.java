@@ -1,8 +1,7 @@
+// SimulationModel.java
 import java.util.ArrayList;
 import java.util.List;
 
-import src.main.java.SeniorZombie;
-import src.main.java.Soldier;
 
 public class SimulationModel {
     

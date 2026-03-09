@@ -17,6 +17,7 @@ public class Doctor extends Human {
     // then moves randomly on the grid
     @Override
     public void step(Entity[][] grid) {
+        super.step(grid);
 
         // 1. Attempt to heal infected humans in surrounding cells
         for (int dr = -HEAL_RANGE; dr <= HEAL_RANGE; dr++) {
