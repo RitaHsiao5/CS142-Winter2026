@@ -6,6 +6,8 @@ public class Citizen extends Human {
 
     @Override
     public void step(Entity[][] grid) {
+        super.step(grid);
+
         // 1. Move randomly
         moveRandom(grid);
 
