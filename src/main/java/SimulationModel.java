@@ -1,6 +1,4 @@
 // SimulationModel.java
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class SimulationModel {
@@ -38,12 +36,13 @@ public class SimulationModel {
                 else if(z<12){
                     grid[x][y]=new Soldier(x, y, 150);
                 }
+                //5% to create zombie in hole grid
                 else if(z<15){
                     int z2=(int)(Math.random()*100);
                     if(z2<10){
                         grid[x][y]=new LordOfZombie(x, y, 150);
                     }
-                    else if(z2<11){
+                    else if(z2<30){
                         grid[x][y]=new SeniorZombie(x, y, 200);
                     }
                     else{
@@ -57,13 +56,13 @@ public class SimulationModel {
         }
     }
 
-    //update 
+    //update every time
     public void update(){
 
         // clear grid
         Entity[][] newGrid=new Entity[rows][cols];
 
-        // to list the entity which already be change
+        //Temporary list the entity which already be change
         java.util.Set<Entity> processed = new java.util.HashSet<>();
 
         for(int x=0;x<rows;x++){
