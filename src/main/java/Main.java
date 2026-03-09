@@ -13,5 +13,5 @@ public class Main {
         
         SimulationGUI gui = new SimulationGUI(model);
         gui.display(); 
-    }    
+    } 
 }
