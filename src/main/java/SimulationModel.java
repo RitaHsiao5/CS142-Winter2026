@@ -1,27 +1,23 @@
 import java.util.ArrayList;
 import java.util.List;
-
-import src.main.java.SeniorZombie;
-import src.main.java.Soldier;
-
 public class SimulationModel {
-    
+
     private Entity[][] grid;
     private int rows;
     private int cols;
 
     // 10% have human, 2% have soldier at first
     public void initializeGrid(int r, int c){
-        
+
         rows=r;
         cols=c;
         grid=new Entity[rows][cols];
 
         for(int x=0;x<rows;x++){
             for(int y=0;y<cols;y++){
-                
+
                 int z=(int)(Math.random()*100);
-                
+
                 if(z<10){
                     if(z<1){
                         int z1=(int)(Math.random()*10);
@@ -75,7 +71,7 @@ public class SimulationModel {
                             e=new NormalZombie(x, y, 100);
                         }
                     }
-                    e.step(grid); 
+                    e.step(grid);
 
                     // put into grid
                     int nx=e.getX();
@@ -88,7 +84,7 @@ public class SimulationModel {
                     // if there are any entity in this block
                     else{
                         newGrid[x][y]=e;
-                        e.setX(x); 
+                        e.setX(x);
                         e.setY(y);
                     }
                 }
@@ -108,7 +104,7 @@ public class SimulationModel {
             for(int y=0;y<cols;y++){
 
                 Entity e=grid[x][y];
-                
+
                 if(e instanceof Citizen){
                     System.out.print(" C ");
                 }
@@ -147,7 +143,7 @@ public class SimulationModel {
                 }
             }
         }
-        
+
         if(numH==0){
             return "DOOMSDAY";
         }
@@ -171,5 +167,14 @@ public class SimulationModel {
             }
         }
         return new int[]{h, z};
+    }
+
+    public void reset() {
+        initializeGrid(rows, cols);
+    }
+    public void initialize(int rows, int cols) {
+        this.rows = rows;
+        this.cols = cols;
+        initializeGrid(rows, cols);
     }
 }
