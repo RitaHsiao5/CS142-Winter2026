@@ -1,6 +1,5 @@
 // SimulationModel.java
 
-
 public class SimulationModel {
     
     private Entity[][] grid;
