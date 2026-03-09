@@ -149,10 +149,10 @@ public class SimulationModel {
         }
         
         if(numH==0){
-            return "HUMAN WIN";
+            return "DOOMSDAY";
         }
         if(numZ==0){
-            return "DOOMSDAY";
+            return "HUMAN WIN";
         }
         return null;
     }
