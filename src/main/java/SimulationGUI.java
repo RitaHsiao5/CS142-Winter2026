@@ -1,6 +1,7 @@
 //SimulationGui.java
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -139,6 +140,13 @@ public class SimulationGUI extends JPanel{
     }
 
     public void display() {
+        StringBuilder sb=new StringBuilder();
+        for (String m:Greetings.all()){
+            sb.append(m).append("\n");
+        }
+
+        javax.swing.JOptionPane.showMessageDialog(null, sb.toString(), "Human vs. Zombie Survival Simulation", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
         JFrame frame=new JFrame("Human vs. Zombie Survival Simulation");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
