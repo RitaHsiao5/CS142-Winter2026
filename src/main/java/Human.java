@@ -12,6 +12,8 @@ public abstract class Human extends LivingEntity {
     public void moveRandom(Entity[][] grid) {
         int rows = grid.length;
         int cols = grid[0].length;
+        int oldX = getX();
+        int oldY = getY();
         int newX = getX();
         int newY = getY();
 
@@ -26,8 +28,10 @@ public abstract class Human extends LivingEntity {
 
         // Check if the new cell is empty
         if(grid[newX][newY] == null) {
+            grid[oldX][oldY] = null;
             setX(newX);
             setY(newY);
+            grid[newX][newY] = this;
         }
         // else: stay in place (collision)
     }
