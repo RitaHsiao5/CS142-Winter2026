@@ -46,10 +46,11 @@ public abstract class Human extends LivingEntity {
     }
     // Step method: will be implemented in subclasses
     @Override
-    public abstract void step(Entity[][] grid) {
+    public void step(Entity[][] grid) {
         if (infected == true) {
             infectionTimer++;
         }
+        moveRandom(grid);
     }
     public int getInfectionSteps() {
         return infectionTimer;
