@@ -59,16 +59,20 @@ public class SimulationModel {
     public void update(){
 
         // clear grid
-        Entity[][] newGrid = new Entity[rows][cols];
+        Entity[][] newGrid=new Entity[rows][cols];
 
         for(int x=0;x<rows;x++){
             for(int y=0;y<cols;y++){
-
                 Entity e=grid[x][y];
 
                 if(e!=null){
+                    // remove dead body
+                    if (e instanceof LivingEntity && !((LivingEntity) e).isAlive()) {
+                        continue; 
+                    }
                     if (e instanceof Human){
                         Human h=(Human)e;
+                        
                         // if this human be infect for too long.
                         // this value can be change(10)
                         if(h.isInfected() && h.getInfectionSteps()>=10){
@@ -91,6 +95,7 @@ public class SimulationModel {
                         e.setX(x); 
                         e.setY(y);
                     }
+                    
                 }
             }
         }
