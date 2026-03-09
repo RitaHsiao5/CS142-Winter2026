@@ -3,7 +3,7 @@ import java.util.Random;
 public abstract class Human extends LivingEntity {
     protected boolean infected = false;
     protected static Random rand = new Random();
-
+    private int infectionTimer = 0;
     public Human(int x, int y, int health) {
         super(x, y, health);
     }
@@ -36,13 +36,23 @@ public abstract class Human extends LivingEntity {
     public boolean isInfected() {
         return infected;
     }
-
     // Infect this human
     public void infect() {
         infected = true;
     }
 
+    public void setInfected(boolean infected) {
+        this.infected = infected;
+    }
     // Step method: will be implemented in subclasses
     @Override
-    public abstract void step(Entity[][] grid);
+    public abstract void step(Entity[][] grid) {
+        if (infected == true) {
+            infectionTimer++;
+        }
+    }
+    public int getInfectionSteps() {
+        return infectionTimer;
+    }
+
 }
