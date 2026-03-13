@@ -66,8 +66,11 @@ public class Zombie extends LivingEntity{
         int x=getX();
         int y=getY();
 
+        boolean t=false;
+
         // spread Infection
         // check is there any human beside?
+        
         for(int dx=-1;dx<=1;dx++){
             for(int dy=-1;dy<=1;dy++){
 
@@ -88,6 +91,7 @@ public class Zombie extends LivingEntity{
                         }
                         else{
                             h.infect();
+                            t=true;
                         }
                         return;
                     }
@@ -96,27 +100,8 @@ public class Zombie extends LivingEntity{
         }
 
         // no human, move random
-        int newX=x;
-        int newY=y;
-
-        int d=(int)(Math.random()*4);
-
-        if(d==0){
-            newX--;
-        } 
-        if(d==1){
-            newX++;
-        } 
-        if(d==2){
-            newY--;
-        } 
-        if(d==3){
-            newY++;
-        } 
-
-        if(newX>=0 && newX<rows && newY>=0 && newY<cols && grid[newX][newY]==null){
-            setX(newX);
-            setY(newY);
+        if(!t){
+            moveTowardsHuman(grid);
         }
     }
 
@@ -167,7 +152,7 @@ public class Zombie extends LivingEntity{
                 nextY+=speed;
             } 
             else if(dy<0){
-                nextY -= speed;
+                nextY-=speed;
             }
         }
 
@@ -177,7 +162,7 @@ public class Zombie extends LivingEntity{
                 this.setX(nextX);
                 this.setY(nextY);
                 grid[nextX][nextY]=this;
-            }   
+            }
         }
     }
 }
