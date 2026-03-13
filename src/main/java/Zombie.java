@@ -119,6 +119,7 @@ public class Zombie extends LivingEntity{
             setY(newY);
         }
     }
+
     public void moveRandom(Entity[][] grid){
         
         int x=grid.length;
@@ -130,13 +131,13 @@ public class Zombie extends LivingEntity{
         if(d==0){
             newX--;
         } 
-        else if(d == 1){
+        else if(d==1){
             newX++;
         } 
-        else if(d == 2){
+        else if(d==2){
             newY--;
         } 
-        else if(d == 3){
+        else if(d==3){
             newY++;
         } 
 
@@ -154,7 +155,6 @@ public class Zombie extends LivingEntity{
         int nextY=this.getY();
 
         if (Math.abs(dx)>Math.abs(dy)){
-
             if(dx>0){
                 nextX+=speed;
             }
@@ -163,7 +163,6 @@ public class Zombie extends LivingEntity{
             } 
         }
         else{
-
             if(dy>0){
                 nextY+=speed;
             } 
@@ -171,7 +170,6 @@ public class Zombie extends LivingEntity{
                 nextY -= speed;
             }
         }
-
 
         if(nextX>=0 && nextX<grid.length && nextY>=0 && nextY<grid[0].length){
             if (grid[nextX][nextY]==null) {
