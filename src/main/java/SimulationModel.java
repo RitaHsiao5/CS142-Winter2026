@@ -13,43 +13,73 @@ public class SimulationModel {
         cols=c;
         grid=new Entity[rows][cols];
 
-        for(int x=0;x<rows;x++){
-            for(int y=0;y<cols;y++){
-                
-                int z=(int)(Math.random()*100);
-                
-                if(z<10){
-                    if(z<1){
-                        int z1=(int)(Math.random()*10);
-                        if(z1<1){
-                            grid[x][y]=new MiracleDoctor(x, y, 150);
-                        }
-                        else{
-                            grid[x][y]=new Doctor(x, y,100);
-                        }
-                    }
-                    else{
-                        grid[x][y]=new Citizen(x, y, 100);
-                    }
+        int targetHumans=100;
+        int targetZombies=20;
+
+        int numH=0;
+        while(numH<targetHumans){
+            int z=(int)(Math.random()*100);
+
+            if(z<1){
+                int x=(int)(Math.random()*rows);
+                int y=(int)(Math.random()*cols);
+                if (grid[x][y]==null){
+                    grid[x][y]=new MiracleDoctor(x, y, 150);
+                    numH++;
                 }
-                else if(z<12){
+            }
+            else if(z<10){
+                int x=(int)(Math.random()*rows);
+                int y=(int)(Math.random()*cols);
+                if (grid[x][y]==null){
+                    grid[x][y]=new Doctor(x, y, 100);
+                    numH++;
+                }
+            }
+            else if(z<25){
+                int x=(int)(Math.random()*rows);
+                int y=(int)(Math.random()*cols);
+                if (grid[x][y]==null){
                     grid[x][y]=new Soldier(x, y, 150);
+                    numH++;
                 }
-                //5% to create zombie in hole grid
-                else if(z<15){
-                    int z2=(int)(Math.random()*100);
-                    if(z2<10){
-                        grid[x][y]=new LordOfZombie(x, y, 150);
-                    }
-                    else if(z2<30){
-                        grid[x][y]=new SeniorZombie(x, y, 200);
-                    }
-                    else{
-                        grid[x][y]=new NormalZombie(x, y, 120);
-                    }
+            }
+            else{
+                int x=(int)(Math.random()*rows);
+                int y=(int)(Math.random()*cols);
+                if (grid[x][y]==null){
+                    grid[x][y]=new Citizen(x, y, 100);
+                    numH++;
                 }
-                else{
-                    grid[x][y]=null;
+            }
+        }
+
+        int numZ=0;
+        while(numZ<targetZombies){
+            int z=(int)(Math.random()*100);
+
+            if(z<5){
+                int x=(int)(Math.random()*rows);
+                int y=(int)(Math.random()*cols);
+                if (grid[x][y]==null){
+                    grid[x][y]=new LordOfZombie(x, y, 150);
+                    numZ++;
+                }
+            }
+            else if(z<20){
+                int x=(int)(Math.random()*rows);
+                int y=(int)(Math.random()*cols);
+                if (grid[x][y]==null){
+                    grid[x][y]=new SeniorZombie(x, y, 120);
+                    numZ++;
+                }
+            }
+            else{
+                int x=(int)(Math.random()*rows);
+                int y=(int)(Math.random()*cols);
+                if (grid[x][y]==null){
+                    grid[x][y]=new NormalZombie(x, y, 100);
+                    numZ++;
                 }
             }
         }
