@@ -13,14 +13,14 @@ public class SimulationModel {
         cols=c;
         grid=new Entity[rows][cols];
 
-        int targetHumans=100;
+        int targetHumans=200;
         int targetZombies=20;
 
         int numH=0;
         while(numH<targetHumans){
             int z=(int)(Math.random()*100);
 
-            if(z<1){
+            if(z<5){
                 int x=(int)(Math.random()*rows);
                 int y=(int)(Math.random()*cols);
                 if (grid[x][y]==null){
@@ -28,7 +28,7 @@ public class SimulationModel {
                     numH++;
                 }
             }
-            else if(z<10){
+            else if(z<20){
                 int x=(int)(Math.random()*rows);
                 int y=(int)(Math.random()*cols);
                 if (grid[x][y]==null){
@@ -36,7 +36,7 @@ public class SimulationModel {
                     numH++;
                 }
             }
-            else if(z<25){
+            else if(z<40){
                 int x=(int)(Math.random()*rows);
                 int y=(int)(Math.random()*cols);
                 if (grid[x][y]==null){
