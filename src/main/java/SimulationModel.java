@@ -6,7 +6,7 @@ public class SimulationModel {
     private int rows;
     private int cols;
 
-    // 10% have human, 2% have soldier at first
+
     public synchronized void initializeGridWithCounts(int r, int c, int h, int z){
         rows=r;
         cols=c;
