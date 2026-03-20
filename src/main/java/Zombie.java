@@ -86,7 +86,7 @@ public class Zombie extends LivingEntity{
                         Human h=(Human)grid[nx][ny];
                         
                         int z=(int)(Math.random()*10);
-                        if(z<7){
+                        if(z<8){
                             attack(h);
                         }
                         else{

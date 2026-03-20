@@ -68,7 +68,7 @@ public class SimulationGUI extends JPanel{
                 //Soldier is a blue on gui
                 //This color can be change
                 if (e instanceof Human) {
-                    Human h = (Human) e;
+                    Human h=(Human) e;
                 
                     if (h.isInfected()){
                         g.setColor(new Color(250, 180, 255)); 
@@ -190,6 +190,18 @@ public class SimulationGUI extends JPanel{
                 refreshStats();
             }
         });
+        
+        JPanel legendPanel=new JPanel();
+        legendPanel.setLayout(new GridLayout(0, 1));
+        legendPanel.setBorder(BorderFactory.createTitledBorder("Entity Colors"));
+
+        legendPanel.add(createLegendItem("Citizen", new Color(210, 220, 255)));
+        legendPanel.add(createLegendItem("Infected Human", new Color(250, 180, 255)));
+        legendPanel.add(createLegendItem("Soldier", new Color(150, 200, 255)));
+        legendPanel.add(createLegendItem("Doctor", new Color(200, 255, 140)));
+        legendPanel.add(createLegendItem("Miracle Doctor", new Color(150, 255, 200)));
+        legendPanel.add(createLegendItem("Zombie", new Color(255, 200, 60)));
+        legendPanel.add(createLegendItem("LordOfZombie", new Color(255, 160, 160)));
 
         controlPanel.add(startB);
         controlPanel.add(Box.createRigidArea(new Dimension(0, 5)));
@@ -204,6 +216,8 @@ public class SimulationGUI extends JPanel{
         controlPanel.add(restartB);
         controlPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         controlPanel.add(new JSeparator());
+        controlPanel.add(legendPanel);
+        controlPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         controlPanel.add(humanLabel);
         controlPanel.add(zombieLabel);
 
@@ -213,10 +227,21 @@ public class SimulationGUI extends JPanel{
         frame.setVisible(true);
     }
 
+    private JPanel createLegendItem(String text, Color color){
+        JPanel item=new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel colorBox=new JPanel();
+        colorBox.setPreferredSize(new Dimension(15, 15));
+        colorBox.setBackground(color);
+        colorBox.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        item.add(colorBox);
+        item.add(new JLabel(text));
+        return item;
+    }
+
     //show the population 
     public void refreshStats() {
         int[] stats=model.getStats();
         humanLabel.setText("Human number: "+stats[0]);
         zombieLabel.setText("Zombie number: "+stats[1]);
-    }
+    } 
 }
