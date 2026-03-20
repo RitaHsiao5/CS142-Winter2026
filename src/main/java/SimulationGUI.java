@@ -118,7 +118,13 @@ public class SimulationGUI extends JPanel{
         }
     }
 
-    public void display() {
+    public void display(){
+        StringBuilder sb=new StringBuilder();
+        for (String msg:Greetings.all()){
+            sb.append(msg).append("\n");
+        }
+        javax.swing.JOptionPane.showMessageDialog(null, sb.toString(), "Welcome to Zombie Survival Simulation", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
         JFrame frame=new JFrame("Zombie Survival Simulation");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());

@@ -61,7 +61,7 @@ public class SimulationModel {
         Entity[][] newGrid=new Entity[rows][cols];
 
         //Temporary list the entity which already be change
-        java.util.Set<Entity> processed = new java.util.HashSet<>();
+        java.util.Set<Entity> processed=new java.util.HashSet<>();
 
         for(int x=0;x<rows;x++){
             for(int y=0;y<cols;y++){
@@ -71,10 +71,10 @@ public class SimulationModel {
                     continue;
                 }
                 // remove dead body
-                if (e instanceof LivingEntity && !((LivingEntity) e).isAlive()) {
+                if(e instanceof LivingEntity && !((LivingEntity) e).isAlive()) {
                     continue; 
                 }
-                if (e instanceof Human){
+                if(e instanceof Human){
                     Human h=(Human)e;
                     // if this human be infect for too long.
                     // this value can be change(10)
@@ -88,6 +88,22 @@ public class SimulationModel {
                 // put into grid
                 int nx=e.getX();
                 int ny=e.getY();
+
+                if(nx<0){
+                    nx=0;
+                } 
+                else if(nx>=rows){
+                    nx=rows-1;
+                } 
+                if(ny<0){
+                    ny=0;
+                } 
+                else if(ny>=cols){
+                    ny=cols-1;
+                } 
+                
+                e.setX(nx);
+                e.setY(ny);
 
                 //check is this block nothing?
                 if (newGrid[nx][ny]==null){
@@ -127,9 +143,9 @@ public class SimulationModel {
     public synchronized int[] getStats(){
         int h=0;
         int z=0;
-        for (int x=0;x<rows;x++) {
-            for (int y=0;y<cols;y++) {
-                if (grid[x][y] instanceof Human){
+        for(int x=0;x<rows;x++){
+            for(int y=0;y<cols;y++){
+                if(grid[x][y] instanceof Human){
                     h++;
                 }
                 else if(grid[x][y] instanceof Zombie){
