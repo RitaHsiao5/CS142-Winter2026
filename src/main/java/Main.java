@@ -4,7 +4,7 @@ public class Main {
         //test line to show commit
 
         SimulationModel model = new SimulationModel();
-        model.initializeGrid(30, 50);
+        model.initializeGridWithCounts(30, 50, 100, 10);
         
         SimulationGUI gui = new SimulationGUI(model);
         gui.display(); 

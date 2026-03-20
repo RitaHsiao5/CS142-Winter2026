@@ -7,86 +7,55 @@ public class SimulationModel {
     private int cols;
 
     // 10% have human, 2% have soldier at first
-    public void initializeGrid(int r, int c){
-        
+    public synchronized void initializeGridWithCounts(int r, int c, int h, int z){
         rows=r;
         cols=c;
         grid=new Entity[rows][cols];
 
-        int targetHumans=200;
-        int targetZombies=20;
-
         int numH=0;
-        while(numH<targetHumans){
-            int z=(int)(Math.random()*100);
-
-            if(z<5){
-                int x=(int)(Math.random()*rows);
-                int y=(int)(Math.random()*cols);
-                if (grid[x][y]==null){
+        while(numH<h){
+            int x=(int)(Math.random()*rows);
+            int y=(int)(Math.random()*cols);
+            if (grid[x][y]==null){
+                int a=(int)(Math.random()*100);
+                if(a<5){
                     grid[x][y]=new MiracleDoctor(x, y, 150);
-                    numH++;
                 }
-            }
-            else if(z<20){
-                int x=(int)(Math.random()*rows);
-                int y=(int)(Math.random()*cols);
-                if (grid[x][y]==null){
+                else if(a<20){
                     grid[x][y]=new Doctor(x, y, 100);
-                    numH++;
                 }
-            }
-            else if(z<40){
-                int x=(int)(Math.random()*rows);
-                int y=(int)(Math.random()*cols);
-                if (grid[x][y]==null){
+                else if(a<40){
                     grid[x][y]=new Soldier(x, y, 150);
-                    numH++;
                 }
-            }
-            else{
-                int x=(int)(Math.random()*rows);
-                int y=(int)(Math.random()*cols);
-                if (grid[x][y]==null){
+                else{
                     grid[x][y]=new Citizen(x, y, 100);
-                    numH++;
                 }
+                numH++;
             }
         }
 
         int numZ=0;
-        while(numZ<targetZombies){
-            int z=(int)(Math.random()*100);
-
-            if(z<5){
-                int x=(int)(Math.random()*rows);
-                int y=(int)(Math.random()*cols);
-                if (grid[x][y]==null){
+        while(numZ<z){
+            int x=(int)(Math.random()*rows);
+            int y=(int)(Math.random()*cols);
+            if (grid[x][y]==null){
+                int a=(int)(Math.random()*100);
+                if(a<5){
                     grid[x][y]=new LordOfZombie(x, y, 150);
-                    numZ++;
                 }
-            }
-            else if(z<20){
-                int x=(int)(Math.random()*rows);
-                int y=(int)(Math.random()*cols);
-                if (grid[x][y]==null){
-                    grid[x][y]=new SeniorZombie(x, y, 120);
-                    numZ++;
+                else if(a<25){
+                    grid[x][y]=new SeniorZombie(x, y, 100);
                 }
-            }
-            else{
-                int x=(int)(Math.random()*rows);
-                int y=(int)(Math.random()*cols);
-                if (grid[x][y]==null){
+                else{
                     grid[x][y]=new NormalZombie(x, y, 100);
-                    numZ++;
                 }
+                numZ++;
             }
         }
     }
 
     //update every time
-    public void update(){
+    public synchronized void update(){
 
         // clear grid
         Entity[][] newGrid=new Entity[rows][cols];
@@ -155,7 +124,7 @@ public class SimulationModel {
     }
 
     //count the number of human and zombie
-    public int[] getStats(){
+    public synchronized int[] getStats(){
         int h=0;
         int z=0;
         for (int x=0;x<rows;x++) {
@@ -169,10 +138,5 @@ public class SimulationModel {
             }
         }
         return new int[]{h, z};
-    }
-
-    public void reset(){
-    // call initializeGrid, create a new Grid
-        initializeGrid(this.rows, this.cols);
     }
 }

@@ -1,6 +1,8 @@
 //SimulationGui.java
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,16 +15,19 @@ public class SimulationGUI extends JPanel{
     private int cellSize=20;
 
     private Timer timer;
-    private int turn=500; 
+    private int turn=300;
 
     // label to control
-
     private JLabel humanLabel;
     private JLabel zombieLabel;
+    private JSlider humanSlider;
+    private JSlider zombieSlider;
+    private JLabel hValueLabel;
+    private JLabel zValueLabel;
+
 
     public SimulationGUI(SimulationModel model){
         this.model=model;
-
         Entity[][] grid=model.getGrid();
 
         //size of hole gui
@@ -50,32 +55,6 @@ public class SimulationGUI extends JPanel{
         zombieLabel=new JLabel("Zombie number: 0");
     }
     
-    // a button to control
-    public void startSimulation(){
-        timer.start();
-    }
-
-    public void pauseSimulation(){
-        timer.stop();
-    }
-
-    public void restartSimulation(){
-        timer.stop();
-        model.reset();
-        repaint();
-        refreshStats();
-    }
-
-    public void setParameters(int rows, int cols, int time){
-        timer.stop();
-
-        this.turn=time;
-        timer.setDelay(time);
-
-        model.initializeGrid(rows, cols);
-        repaint();
-    }
-
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -140,64 +119,96 @@ public class SimulationGUI extends JPanel{
     }
 
     public void display() {
-        StringBuilder sb=new StringBuilder();
-        for (String m:Greetings.all()){
-            sb.append(m).append("\n");
-        }
-
-        javax.swing.JOptionPane.showMessageDialog(null, sb.toString(), "Human vs. Zombie Survival Simulation", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-
-        JFrame frame=new JFrame("Human vs. Zombie Survival Simulation");
+        JFrame frame=new JFrame("Zombie Survival Simulation");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
-        // the grid in the center
+        // Show grid left
         frame.add(this, BorderLayout.CENTER);
 
+        // show controlPanel rightside
         JPanel controlPanel=new JPanel();
-        controlPanel.setLayout(new GridLayout(6, 1));
+        controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
+        controlPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // a button to start
+        //start button
         JButton startB=new JButton("START");
-        ActionListener listener1=new ActionListener(){
+        startB.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                startSimulation();
+                timer.start();
             }
-        };
-        startB.addActionListener(listener1);
+        });
 
-        // a button to pause
+        //pause button
         JButton pauseB=new JButton("PAUSE");
-        ActionListener listener2=new ActionListener(){
+        pauseB.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                pauseSimulation();
+                timer.stop();
             }
-        };
-        pauseB.addActionListener(listener2);
+        });
 
-        // A button to reset
+        // human slider
+        hValueLabel=new JLabel("Set Initial Humans: 100");
+        hValueLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        humanSlider=new JSlider(JSlider.HORIZONTAL, 10, 500, 100);
+        humanSlider.setMajorTickSpacing(100);
+        humanSlider.setPaintTicks(true);
+        humanSlider.addChangeListener(new ChangeListener(){
+            @Override
+            public void stateChanged(ChangeEvent e){
+                hValueLabel.setText("Set Humans: "+humanSlider.getValue());
+            }
+        });
+
+        // zombie slider
+        zValueLabel=new JLabel("Set Initial Zombies: 20");
+        zValueLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        zombieSlider=new JSlider(JSlider.HORIZONTAL, 0, 100, 20);
+        zombieSlider.setMajorTickSpacing(20);
+        zombieSlider.setPaintTicks(true);
+        zombieSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e){
+                zValueLabel.setText("Set Zombies: "+zombieSlider.getValue());
+            }
+        });
+
+        // RESTART button
         JButton restartB=new JButton("RESTART");
-        ActionListener listener3=new ActionListener(){
+        restartB.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                restartSimulation();
+                timer.stop();
+                int h=humanSlider.getValue();
+                int z=zombieSlider.getValue();
+        
+                model.initializeGridWithCounts(30, 50, h, z);
+        
+                repaint();
+                refreshStats();
             }
-        };
-        restartB.addActionListener(listener3);
+        });
 
         controlPanel.add(startB);
+        controlPanel.add(Box.createRigidArea(new Dimension(0, 5)));
         controlPanel.add(pauseB);
+        controlPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        controlPanel.add(hValueLabel);
+        controlPanel.add(humanSlider);
+        controlPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        controlPanel.add(zValueLabel);
+        controlPanel.add(zombieSlider);
+        controlPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         controlPanel.add(restartB);
+        controlPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         controlPanel.add(new JSeparator());
         controlPanel.add(humanLabel);
         controlPanel.add(zombieLabel);
-        
-        // Right side
+
         frame.add(controlPanel, BorderLayout.EAST);
         frame.pack();
-
         refreshStats();
         frame.setVisible(true);
     }
